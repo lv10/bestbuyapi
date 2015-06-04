@@ -2,7 +2,7 @@
 #    Product Search Description Types
 # ======================================
 
-PRODUCT_SEARCH_DESCRIPTION_TYPES = {
+PRODUCT_DESCRIPTION_TYPES = {
     1: "name",
     2: "description",
     3: "shortDescription",
