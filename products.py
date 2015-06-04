@@ -1,6 +1,8 @@
 import requests
 from config import APIKEY
 
+from constants import PRODUCT_SEARCH_PARAMS as valid_prod_params
+
 
 class BestBuyProductAPIError(Exception):
 
@@ -52,6 +54,11 @@ class BestBuyProductsAPI(object):
         """
 
         for key, value in params.iteritems():
+
+            if key not in valid_prod_params:
+                err_msg = "{0} is an invalid Product Search Param".format(key)
+                raise BestBuyProductAPIError(err_msg)
+
             if value is None:
                 err_msg = "Key {0} can't have None for a value".format(key)
                 raise BestBuyProductAPIError(err_msg)
