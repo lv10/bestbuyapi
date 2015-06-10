@@ -1,6 +1,7 @@
 import requests
 
-from constants import PRODUCT_SEARCH_PARAMS, PRODUCT_DESCRIPTION_TYPES
+from constants import PRODUCT_SEARCH_PARAMS, PRODUCT_DESCRIPTION_TYPES, \
+    BASE_URL
 
 
 class BestBuyProductAPIError(Exception):
@@ -13,16 +14,12 @@ class BestBuyProductAPIError(Exception):
 
 class BestBuyProductsAPI(object):
 
-    NAME = "name"
-    DESCRIPTION = "description"
-    SHORT_DESCRIPTION = "shortDescription"
-    LONG_DESCRIPTION = "longDescription"
-
     def __init__(self, api_key):
         """
             :param api_key: best buy developer API key.
         """
         self.api_key = api_key.strip()
+        self.api_query = None
 
     def _call(self, payload):
         """
@@ -30,45 +27,64 @@ class BestBuyProductsAPI(object):
 
             :rType: JSON
         """
-        params = self._validate_params(payload)
-        url = self._build_url(params)
-        request = requests.get(url)
+        valid_payload = self._validate_params(payload)
+        url, valid_payload = self._build_url(valid_payload)
+        request = requests.get(url, pa=valid_payload)
 
         return request.json()
 
-    def _build_url(self, params):
+    def _build_url(self, payload):
         """
             Receives a payload (dict) with all the necessary make a call to
-            the Best Buy API and returns a string URL to be used to make the
-            API call. The API key is added to the request at this point.
+            the Best Buy API and returns a string URL that includes the query
+            and the dict parameters pre-processed for a API call to be made.
 
             :param paylod: dictionary with request parameters
 
-            :rType: String
+            :rType: tuple that contains the url that includes the query and
+                    the parameters pre-processed for a API call to be made.
         """
-        pass
 
-    def _validate_params(self, params):
+        query = payload['query']
+
+        # Pre-process paramenters before submitting payload.
+
+        out = dict()
+
+        for key, value in payload['params']:
+            if type(value) is list:
+                out[key] = ",".join(value)
+            else:
+                out[key] = value
+
+        # Add key to params
+        out['key'] = self.api_key
+
+        url = BASE_URL + "({0})".format(query)
+
+        return (url, out)
+
+    def _validate_params(self, payload):
         """
             Validate parameters, double check that there are no None values
             in the keys.
 
-            :param params: dictionary, with the parameters to be used to make a
-                           a request.
+            :param payload: dictionary, with the parameters to be used to make
+                            a request.
         """
 
-        for key, value in params.iteritems():
+        for key, value in payload['params'].iteritems():
 
             if key not in PRODUCT_SEARCH_PARAMS:
-
-                err_msg = "{0} is an invalid Product Search Param".format(key)
+                err_msg = ("{0} is an invalid Product"
+                           " Search Parameter".format(key))
                 raise BestBuyProductAPIError(err_msg)
 
             if value is None:
                 err_msg = "Key {0} can't have None for a value".format(key)
                 raise BestBuyProductAPIError(err_msg)
 
-        return params
+        return payload
 
     # =================================
     #   Search by description or SKU
@@ -88,17 +104,24 @@ class BestBuyProductsAPI(object):
             :param description: String with the actual description's content.
         """
         d_type = PRODUCT_DESCRIPTION_TYPES[description_type]
-        kwargs[d_type] = description
 
-        return self._call(kwargs)
+        payload = {
+            'query': "{0}={1}".format(d_type, description),
+            'params': kwargs
+        }
+
+        return self._call(payload)
 
     def search_by_sku(self, sku, **kwargs):
         """
             Search the product API by SKU
 
             :param sky: string, with the SKU number of the desired product.
-            :param kwargs: dictionary, with request parameters
+           :param kwargs: dictionary, with request parameters
         """
-        kwargs["sku"] = sku
+        payload = {
+            'query': "sku={0}".format(sku),
+            'params': kwargs
+        }
 
-        return self._call(kwargs)
+        return self._call(payload)
