@@ -19,7 +19,6 @@ class BestBuyProductsAPI(object):
             :param api_key: best buy developer API key.
         """
         self.api_key = api_key.strip()
-        self.api_query = None
 
     def _call(self, payload):
         """
@@ -29,7 +28,7 @@ class BestBuyProductsAPI(object):
         """
         valid_payload = self._validate_params(payload)
         url, valid_payload = self._build_url(valid_payload)
-        request = requests.get(url, pa=valid_payload)
+        request = requests.get(url, params=valid_payload)
 
         return request.json()
 
@@ -51,7 +50,7 @@ class BestBuyProductsAPI(object):
 
         out = dict()
 
-        for key, value in payload['params']:
+        for key, value in payload['params'].iteritems():
             if type(value) is list:
                 out[key] = ",".join(value)
             else:
@@ -125,3 +124,12 @@ class BestBuyProductsAPI(object):
         }
 
         return self._call(payload)
+
+
+pa = BestBuyProductsAPI("aSecretKeyForTesting")
+kwargs = {'format': "json"}
+
+result = pa.search_by_description(description_type=1,
+                                  description="ipad",
+                                  **kwargs)
+print result
