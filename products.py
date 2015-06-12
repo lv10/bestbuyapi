@@ -30,6 +30,7 @@ class BestBuyProductsAPI(object):
         url, valid_payload = self._build_url(valid_payload)
         request = requests.get(url, params=valid_payload)
 
+        import ipdb; ipdb.set_trace() # BREAKPOINT
         return request.json()
 
     def _build_url(self, payload):
@@ -57,7 +58,7 @@ class BestBuyProductsAPI(object):
                 out[key] = value
 
         # Add key to params
-        out['apikey'] = self.api_key
+        out['apiKey'] = self.api_key
 
         url = BASE_URL + "products({0})".format(query)
 
