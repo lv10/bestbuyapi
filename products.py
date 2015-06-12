@@ -57,9 +57,9 @@ class BestBuyProductsAPI(object):
                 out[key] = value
 
         # Add key to params
-        out['key'] = self.api_key
+        out['apikey'] = self.api_key
 
-        url = BASE_URL + "({0})".format(query)
+        url = BASE_URL + "products({0})".format(query)
 
         return (url, out)
 
@@ -124,12 +124,3 @@ class BestBuyProductsAPI(object):
         }
 
         return self._call(payload)
-
-
-pa = BestBuyProductsAPI("aSecretKeyForTesting")
-kwargs = {'format': "json"}
-
-result = pa.search_by_description(description_type=1,
-                                  description="ipad",
-                                  **kwargs)
-print result
