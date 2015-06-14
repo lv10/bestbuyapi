@@ -125,3 +125,31 @@ class BestBuyProductsAPI(object):
         }
 
         return self._call(payload)
+
+    def search_by_review_criteria(self, review_type, review, **kwargs):
+        """
+            Searches the product API using the Review criteria.
+
+            :param review_type: Integer, with customer review type the API
+                                call will use.
+                                The integer represent:
+                                - 1: "customerReviewAverage"
+                                - 2: "customerReviewCount"
+            :param review: Float, with the actual value of the review to be
+                           criteria to be search for.
+                           - customerReviewAverage: should be a number  between
+                             0.0 and 5.0
+                           - customerReviewCount: should be a number  which is
+                             greater than 0.
+
+        """
+
+        if review_type == 2:
+            review = int(review)
+
+        payload = {
+            'query': "{0}={1}".format(review_type, review),
+            'params': kwargs
+        }
+
+        return self.__call(payload)

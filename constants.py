@@ -16,6 +16,11 @@ PRODUCT_DESCRIPTION_TYPES = {
     4: "longDescription"
 }
 
+PRODUCT_SEARCH_CRITERIA_TYPES = {
+    1: "customerReviewAverage",
+    2: "customerReviewCount"
+}
+
 # ======================================
 #         Valid Search Params
 # ======================================
