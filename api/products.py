@@ -30,7 +30,10 @@ class BestBuyProductsAPI(object):
         url, valid_payload = self._build_url(valid_payload)
         request = requests.get(url, params=valid_payload)
 
-        return request.json()
+        if request.headers['content-type'] == "text/json":
+            return request.json()
+
+        return request.content
 
     def _build_url(self, payload):
         """
@@ -151,7 +154,7 @@ class BestBuyProductsAPI(object):
             'params': kwargs
         }
 
-        return self.__call(payload)
+        return self._call(payload)
 
     def search(self, query, **kwargs):
         """
@@ -162,9 +165,10 @@ class BestBuyProductsAPI(object):
                           check BestBuy documenation at https://goo.gl/jWboE2
 
         """
+
         payload = {
             'query': query,
             'params': kwargs
         }
 
-        return self.__call(payload)
+        return self._call(payload)

@@ -54,6 +54,7 @@ PRODUCT_SEARCH_PARAMS = [
     "shortDescription ",
     "shortDescriptionHtml ",
     "sku",
+    "show",
     "upc",
     "warrantyLabor",
     "warrantyParts",
