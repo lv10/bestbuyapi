@@ -41,7 +41,7 @@ class TestProductsAPI(unittest.TestCase):
 
         payload = {
             'query': "some query",
-            'params': {'fiz': "bazz"}
+            'params': {'fiz': "bazz", 'wrong': None}
         }
 
         self.bb._validate_params(payload)
