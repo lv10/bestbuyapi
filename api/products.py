@@ -157,6 +157,10 @@ class BestBuyProductsAPI(object):
 
         return self._call(payload)
 
+    # =================================
+    #         Custome Search
+    # =================================
+
     def search(self, query, **kwargs):
         """
             Performs a customized search on the BestBuy product API. Query
