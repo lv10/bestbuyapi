@@ -1,7 +1,7 @@
 import requests
 
 from constants import PRODUCT_SEARCH_PARAMS, PRODUCT_DESCRIPTION_TYPES, \
-    BASE_URL
+    API_SEARCH_PARAMS, BASE_URL
 
 
 class BestBuyProductAPIError(Exception):
@@ -77,7 +77,8 @@ class BestBuyProductsAPI(object):
 
         for key, value in payload['params'].iteritems():
 
-            if key not in PRODUCT_SEARCH_PARAMS:
+            if (key not in PRODUCT_SEARCH_PARAMS
+                    or key not in API_SEARCH_PARAMS):
                 err_msg = ("{0} is an invalid Product"
                            " Search Parameter".format(key))
                 raise BestBuyProductAPIError(err_msg)
