@@ -118,7 +118,7 @@ class BestBuyProductsAPI(object):
         """
             Search the product API by SKU
 
-            :param sky: string, with the SKU number of the desired product.
+           :param sky: string, with the SKU number of the desired product.
            :param kwargs: dictionary, with request parameters
         """
         payload = {
