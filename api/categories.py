@@ -2,7 +2,6 @@ import requests
 
 from constants import *
 
-
 class BestBuyCategoryAPIError(Exception):
     """
         Errors generated before BestBuy servers respond to a call
