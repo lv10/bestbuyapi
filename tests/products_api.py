@@ -1,15 +1,32 @@
 import json
+import unittest
 import xml.etree.ElementTree as ET
 
+from api.constants import BASE_URL
 from api.products import BestBuyProductsAPI
-from tests.api_basics import TestAPIBasics
 
 
-class TestProductsAPI(TestAPIBasics):
+class TestProductsAPI(unittest.TestCase):
 
     def setUp(self):
         self.key = "YourSecretKey"
         self.bestbuy = BestBuyProductsAPI(self.key)
+        self._api_name = "products"
+
+    def test_build_url(self):
+
+        sample_url = "{0}{1}(sku=43900)".format(BASE_URL, self._api_name)
+
+        payload = {
+            'query': "sku=43900",
+            'params': {'format': "json"}
+        }
+
+        url, thePayload = self.bestbuy._build_url(payload)
+
+        assert sample_url == url
+        assert (thePayload['format'] == "json"
+                and thePayload.get('apiKey') is not None)
 
     def test_json_response(self):
 

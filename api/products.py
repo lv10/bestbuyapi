@@ -12,6 +12,9 @@ class BestBuyProductAPIError(BestBuyAPIError):
 
 class BestBuyProductsAPI(BestBuyAPI):
 
+    def _api_name(self):
+        return "products"
+
     # =================================
     #   Search by description or SKU
     # =================================

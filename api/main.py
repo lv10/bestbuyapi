@@ -34,6 +34,9 @@ class BestBuyAPI(object):
 
         return request.content
 
+    def _api_name(self):
+        return None
+
     def _build_url(self, payload):
         """
             Receives a payload (dict) with all the necessary make a call to
@@ -61,7 +64,7 @@ class BestBuyAPI(object):
         # Add key to params
         out['apiKey'] = self.api_key
 
-        url = BASE_URL + "products({0})".format(query)
+        url = BASE_URL + "{0}({1})".format(self._api_name(), query)
 
         return (url, out)
 
