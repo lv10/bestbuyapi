@@ -1,17 +1,18 @@
 import json
 import unittest
-#import xml.etree.ElementTree as ET
 
-from api.constants import BASE_URL
-from api.categories import BestBuyCategoryAPI
+from bestbuyapi import BASE_URL
+from bestbuyapi import BestBuyCategoryAPI
+from bestbuyapi.config import TEST_API_KEY
 
 
 class TestCategoryAPI(unittest.TestCase):
 
     def setUp(self):
-        self.key = "YourSecretKey"
-        self.bestbuy = BestBuyCategoryAPI(self.key)
+
+        self.key = TEST_API_KEY
         self._api_name = "categories"
+        self.bestbuy = BestBuyCategoryAPI(self.key)
 
     def test_build_url(self):
 

@@ -4,14 +4,16 @@ import xml.etree.ElementTree as ET
 
 from nose.tools import raises
 
-from api.products import BestBuyAPIError, BestBuyProductsAPI
-from api.categories import BestBuyCategoryAPI
+from bestbuyapi import BestBuyCategoryAPI
+from bestbuyapi.config import TEST_API_KEY
+from bestbuyapi import BestBuyAPIError, BestBuyProductsAPI
 
 
 class TestAPIBasics(unittest.TestCase):
 
     def setUp(self):
-        self.key = "aSecretKey"
+
+        self.key = TEST_API_KEY
 
         # initialize both bestbuy products and categories api both APIs
         # are used arbitrarily to make general tests
