@@ -76,8 +76,7 @@ class BestBuyAPI(object):
 
         for key, value in payload['params'].iteritems():
 
-            if (key not in PRODUCT_SEARCH_PARAMS
-                    or key not in API_SEARCH_PARAMS):
+            if key not in API_SEARCH_PARAMS:
                 err_msg = ("{0} is an invalid Product"
                            " Search Parameter".format(key))
                 raise BestBuyAPIError(err_msg)
