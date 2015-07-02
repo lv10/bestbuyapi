@@ -1,6 +1,5 @@
 import json
 import unittest
-import xml.etree.ElementTree as ET
 
 from api.constants import BASE_URL
 from api.products import BestBuyProductsAPI
@@ -27,24 +26,6 @@ class TestProductsAPI(unittest.TestCase):
         assert sample_url == url
         assert (thePayload['format'] == "json"
                 and thePayload.get('apiKey') is not None)
-
-    def test_json_response(self):
-
-        query = "sku=9776457"
-        response = self.bestbuy.search(query=query, format="json")
-
-        assert type(json.loads(response)) is dict
-
-    def test_xml_response(self):
-
-        sku_nbr = 9776457
-        query = "sku={0}".format(sku_nbr)
-
-        # leaving the format blank will default to xml
-        response = self.bestbuy.search(query=query, format="xml")
-        xml_tree = ET.fromstring(response)
-        response_sku = xml_tree.getchildren()[0].findall('sku')[0].text
-        assert int(response_sku) == sku_nbr
 
     def test_search_by_description(self):
 
