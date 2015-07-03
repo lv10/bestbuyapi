@@ -33,11 +33,11 @@ How to
 -------
 
 .. code-block:: python
+
     >>> import bestbuy
     >>> from bestbuy import BestBuyProductsAPI
     >>> bb = BestBuyProductsAPI("YourSecretAPIKey")
     >>>
     >>> bb.search(query="sku=9776457", format="json", show=id)
-    ...
 
 Any questions please feel free to email me at: luis@lv10.me
