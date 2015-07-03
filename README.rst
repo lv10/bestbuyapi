@@ -15,6 +15,10 @@ The wrapper doesn't assume any design requirements on the user end. Queries to
 the API's are done similar to what you put in the browser with the convenience
 of having python prepare for you the query, url, and interpret the response.
 
+NOTICE: This is a python library in the making. New features and bug fixes will
+be included. Feel free to add change anything you consider could be better or
+could extend the functionality of the library.
+
 Features
 --------
 
