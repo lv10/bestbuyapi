@@ -1,6 +1,12 @@
 Python Best Buy API Wrapper
 ===========================
 
+.. image:: https://img.shields.io/badge/pypi-2.7-green.svg
+    :target: https://pypi.python.org/pypi/BestBuyAPI
+
+.. image:: https://img.shields.io/badge/version-0.4-blue.svg
+
+
 This is a small python wrapper implementation for BestBuy API. The Wrapper not
 complete by any means. As of now, it only supports the calls to the Products API
 and Categories API. Locations and Reviews API are in the making.
