@@ -1,9 +1,9 @@
 import json
 import unittest
 
-from bestbuyapi import BASE_URL
-from bestbuyapi import BestBuyProductsAPI
-from bestbuyapi.config import TEST_API_KEY
+from bestbuy import BASE_URL
+from bestbuy import BestBuyProductsAPI
+from config import TEST_API_KEY
 
 
 class TestProductsAPI(unittest.TestCase):

@@ -4,9 +4,8 @@ import xml.etree.ElementTree as ET
 
 from nose.tools import raises
 
-from bestbuyapi import BestBuyCategoryAPI
-from bestbuyapi.config import TEST_API_KEY
-from bestbuyapi import BestBuyAPIError, BestBuyProductsAPI
+from config import TEST_API_KEY
+from bestbuy import BestBuyAPIError, BestBuyProductsAPI, BestBuyCategoryAPI
 
 
 class TestAPIBasics(unittest.TestCase):
