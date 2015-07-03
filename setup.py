@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="BestBuyAPI",
-    version="0.0.42",
+    version="0.0.43",
     description="Best Buy API Wrapper",
     url="https://github.com/lv10/bestbuyapi",
     author="lv10",
