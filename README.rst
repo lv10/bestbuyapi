@@ -31,6 +31,14 @@ Features
 For details on how to use the Best Buy API go to:
 https://developer.bestbuy.com/documentation
 
+Install
+-------
+
+.. code-block:: python
+
+    $ pip install BestBuyAPI
+
+
 How to
 -------
 
