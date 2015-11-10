@@ -40,6 +40,15 @@ How to
     >>> from bestbuy import BestBuyProductsAPI
     >>> bb = BestBuyProductsAPI("YourSecretAPIKey")
     >>>
-    >>> bb.search(query="sku=9776457", format="json", show=id)
+    >>> bb.search(query="sku=9776457", format="json")
+
+
+FAQ
+-------
+
+- Is there any difference between /api.bestbuy.com/ and api.remix.bestbuy.com?
+
+  A:// This is the response from BestBuy Dev department: "There is no difference, they serve the same data - we just consolidated domains. The official url to use is api.bestbuy.com though."
+
 
 Any questions please feel free to email me at: luis@lv10.me
