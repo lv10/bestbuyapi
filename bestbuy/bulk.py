@@ -1,3 +1,4 @@
+from constants import BULK_API
 from main import BestBuyAPI, BestBuyAPIError
 
 
@@ -12,7 +13,7 @@ class BestBuyBulkAPIError(BestBuyAPIError):
 class BestBuyBulkAPI(BestBuyAPI):
 
     def _api_name(self):
-        return "bulk"
+        return BULK_API
 
     def archive(self, name, file_format):
         """
@@ -40,7 +41,7 @@ class BestBuyBulkAPI(BestBuyAPI):
             'params': {}
         }
 
-        return self._call(payload, bulk=True)
+        return self._call(payload)
 
     def archive_subset(self, subset, file_format):
         """
@@ -73,4 +74,4 @@ class BestBuyBulkAPI(BestBuyAPI):
             'params': {}
         }
 
-        return self._call(payload, bulk=True)
+        return self._call(payload)

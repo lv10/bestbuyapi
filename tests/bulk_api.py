@@ -23,7 +23,7 @@ class TestBulkAPI(unittest.TestCase):
             'params': {}
         }
 
-        url, thePayload = self.bestbuy._build_url(payload, bulk=True)
+        url, thePayload = self.bestbuy._build_url(payload)
 
         assert sample_url == url
         assert thePayload.get('apiKey') is not None

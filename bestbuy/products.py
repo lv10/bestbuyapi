@@ -1,5 +1,5 @@
 from main import BestBuyAPI, BestBuyAPIError
-from constants import PRODUCT_DESCRIPTION_TYPES
+from constants import PRODUCT_DESCRIPTION_TYPES, PRODUCT_API
 
 
 class BestBuyProductAPIError(BestBuyAPIError):
@@ -13,7 +13,7 @@ class BestBuyProductAPIError(BestBuyAPIError):
 class BestBuyProductsAPI(BestBuyAPI):
 
     def _api_name(self):
-        return "products"
+        return PRODUCT_API
 
     # =================================
     #   Search by description or SKU

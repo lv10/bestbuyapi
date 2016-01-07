@@ -36,3 +36,11 @@ class TestCategoryAPI(unittest.TestCase):
         json_response = json.loads(response)
 
         assert json_response['categories'][0]['id'] == cat_id
+
+    def test_search_category_by_name(self):
+        cat_name = u"Leisure Gifts"
+        query = "name={0}".format(cat_name)
+        response = self.bestbuy.search(query=query, format="json")
+        json_response = json.loads(response)
+
+        assert json_response['categories'][0]['name'] == cat_name

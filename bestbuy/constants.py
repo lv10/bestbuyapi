@@ -6,6 +6,14 @@ API_VERSION = "v1"
 BASE_URL = "http://api.bestbuy.com/{0}/".format(API_VERSION)
 
 # ======================================
+#             API Names
+# ======================================
+
+PRODUCT_API = "products"
+CATEGORY_API = "categories"
+BULK_API = "bulk"
+
+# ======================================
 #    Product Search Description Types
 # ======================================
 

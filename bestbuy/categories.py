@@ -1,3 +1,4 @@
+from constants import CATEGORY_API
 from main import BestBuyAPI, BestBuyAPIError
 
 
@@ -11,7 +12,7 @@ class BestBuyCategoryAPIError(BestBuyAPIError):
 class BestBuyCategoryAPI(BestBuyAPI):
 
     def _api_name(self):
-        return "categories"
+        return CATEGORY_API
 
     # =================================
     #   Search by description or SKU
@@ -52,12 +53,12 @@ class BestBuyCategoryAPI(BestBuyAPI):
         """
             Search the category API by name
 
-            :param id: string, with the name of the desired category.
+            :param name: string, with the name of the desired category.
             :param kwargs: dictionary, with request parameters
         """
 
         payload = {
-            'query': "id={0}".format(category),
+            'query': "name={0}".format(category),
             'params': kwargs
         }
 

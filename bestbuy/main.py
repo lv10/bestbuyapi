@@ -1,6 +1,6 @@
 import requests
 
-from constants import API_SEARCH_PARAMS, BASE_URL
+from constants import API_SEARCH_PARAMS, BASE_URL, BULK_API
 
 
 class BestBuyAPIError(Exception):
@@ -19,7 +19,7 @@ class BestBuyAPI(object):
         """
         self.api_key = api_key.strip()
 
-    def _call(self, payload, bulk=False):
+    def _call(self, payload):
         """
             Actual call ot the Best Buy API.
 
@@ -28,7 +28,7 @@ class BestBuyAPI(object):
                 - Text/String
         """
         valid_payload = self._validate_params(payload)
-        url, valid_payload = self._build_url(valid_payload, bulk)
+        url, valid_payload = self._build_url(valid_payload)
         request = requests.get(url, params=valid_payload)
 
         if request.headers['content-type'] == "text/json":
@@ -39,7 +39,7 @@ class BestBuyAPI(object):
     def _api_name(self):
         return None
 
-    def _build_url(self, payload, bulk=False):
+    def _build_url(self, payload):
         """
             Receives a payload (dict) with the necessary params to make a call
             to the Best Buy API and returns a string URL that includes the
@@ -67,7 +67,7 @@ class BestBuyAPI(object):
         # Add key to params
         out['apiKey'] = self.api_key
 
-        if bulk:
+        if self._api_name() == BULK_API:
             url = BASE_URL + "{0}".format(query)
         else:
             url = BASE_URL + "{0}({1})".format(self._api_name(), query)
