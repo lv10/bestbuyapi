@@ -40,7 +40,7 @@ class TestAPIBasics(unittest.TestCase):
 
     def test_xml_response(self):
 
-        sku_nbr = 9776457
+        sku_nbr = 7619002
         query = "sku={0}".format(sku_nbr)
 
         # leaving the format blank will default to xml

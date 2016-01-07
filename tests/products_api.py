@@ -47,7 +47,7 @@ class TestProductsAPI(unittest.TestCase):
 
     def test_search_by_sku(self):
 
-        sku_nbr = 9776457
+        sku_nbr = 7150065
 
         response = self.bestbuy.search_by_sku(sku=sku_nbr, format="json")
         json_response = json.loads(response)

@@ -3,7 +3,7 @@
 # ======================================
 
 API_VERSION = "v1"
-BASE_URL = "http://api.remix.bestbuy.com/{0}/".format(API_VERSION)
+BASE_URL = "http://api.bestbuy.com/{0}/".format(API_VERSION)
 
 # ======================================
 #    Product Search Description Types

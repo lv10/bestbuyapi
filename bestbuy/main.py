@@ -1,6 +1,6 @@
 import requests
 
-from constants import PRODUCT_SEARCH_PARAMS, API_SEARCH_PARAMS, BASE_URL
+from constants import API_SEARCH_PARAMS, BASE_URL
 
 
 class BestBuyAPIError(Exception):
@@ -19,14 +19,16 @@ class BestBuyAPI(object):
         """
         self.api_key = api_key.strip()
 
-    def _call(self, payload):
+    def _call(self, payload, bulk=False):
         """
             Actual call ot the Best Buy API.
 
-            :rType: JSON
+            :rType:
+                - JSON
+                - Text/String
         """
         valid_payload = self._validate_params(payload)
-        url, valid_payload = self._build_url(valid_payload)
+        url, valid_payload = self._build_url(valid_payload, bulk)
         request = requests.get(url, params=valid_payload)
 
         if request.headers['content-type'] == "text/json":
@@ -37,11 +39,12 @@ class BestBuyAPI(object):
     def _api_name(self):
         return None
 
-    def _build_url(self, payload):
+    def _build_url(self, payload, bulk=False):
         """
-            Receives a payload (dict) with all the necessary make a call to
-            the Best Buy API and returns a string URL that includes the query
-            and the dict parameters pre-processed for a API call to be made.
+            Receives a payload (dict) with the necessary params to make a call
+            to the Best Buy API and returns a string URL that includes the
+            query and the dict parameters pre-processed for a API call to be
+            made.
 
             :param paylod: dictionary with request parameters
 
@@ -64,7 +67,10 @@ class BestBuyAPI(object):
         # Add key to params
         out['apiKey'] = self.api_key
 
-        url = BASE_URL + "{0}({1})".format(self._api_name(), query)
+        if bulk:
+            url = BASE_URL + "{0}".format(query)
+        else:
+            url = BASE_URL + "{0}({1})".format(self._api_name(), query)
 
         return (url, out)
 
