@@ -1,17 +1,16 @@
+import os
 import zipfile
 import unittest
 from io import StringIO
 
-from bestbuy import BASE_URL
-from bestbuy import BestBuyBulkAPI
-from config import TEST_API_KEY
+from bestbuy import BASE_URL, BestBuyBulkAPI
 
 
 class TestBulkAPI(unittest.TestCase):
 
     def setUp(self):
 
-        self.key = TEST_API_KEY
+        self.key = os.getenv("BESTBUY_API_KEY")
         self.bestbuy = BestBuyBulkAPI(self.key)
 
     def test_build_url(self):

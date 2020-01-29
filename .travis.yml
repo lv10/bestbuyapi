@@ -1,0 +1,13 @@
+---
+
+language: python
+
+python:
+    - "3.6"
+    - "3.7"
+
+install:
+    - pipenv install
+
+script:
+    - nosetests -x -v -s tests/ --cover-package=bestbuy --with-coverage

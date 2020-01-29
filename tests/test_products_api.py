@@ -1,16 +1,15 @@
+import os
 import json
 import unittest
 
-from bestbuy import BASE_URL
-from bestbuy import BestBuyProductsAPI
-from config import TEST_API_KEY
+from bestbuy import BASE_URL, BestBuyProductsAPI
 
 
 class TestProductsAPI(unittest.TestCase):
 
     def setUp(self):
 
-        self.key = TEST_API_KEY
+        self.key = os.getenv("BESTBUY_API_KEY")
         self._api_name = "products"
         self.bestbuy = BestBuyProductsAPI(self.key)
 

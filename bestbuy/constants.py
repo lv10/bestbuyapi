@@ -3,7 +3,7 @@
 # ======================================
 
 API_VERSION = "v1"
-BASE_URL = "http://api.bestbuy.com/{0}/".format(API_VERSION)
+BASE_URL = f"http://api.bestbuy.com/{API_VERSION}/"
 
 # ======================================
 #             API Names
@@ -21,26 +21,16 @@ PRODUCT_DESCRIPTION_TYPES = {
     1: "name",
     2: "description",
     3: "shortDescription",
-    4: "longDescription"
+    4: "longDescription",
 }
 
-PRODUCT_SEARCH_CRITERIA_TYPES = {
-    1: "customerReviewAverage",
-    2: "customerReviewCount"
-}
+PRODUCT_SEARCH_CRITERIA_TYPES = {1: "customerReviewAverage", 2: "customerReviewCount"}
 
 # ======================================
 #         Valid Search Params
 # ======================================
 
-API_SEARCH_PARAMS = [
-    "facet",
-    "format",
-    "show",
-    "sort",
-    "page",
-    "pageSize"
-]
+API_SEARCH_PARAMS = ["facet", "format", "show", "sort", "page", "pageSize"]
 
 PRODUCT_SEARCH_PARAMS = [
     "accessories.sku",
@@ -111,8 +101,7 @@ PRODUCT_SEARCH_PARAMS = [
     "salesRankLongTerm",
     "salesRankMediumTerm",
     "salesRankShortTerm",
-    "secondaryMarkey"
-    "sellerId",
+    "secondaryMarkey" "sellerId",
     "shipping.ground",
     "shipping.nextDay",
     "shipping.secondDay",
@@ -130,5 +119,5 @@ PRODUCT_SEARCH_PARAMS = [
     "warrantyLabor",
     "warrantyParts",
     "weight",
-    "width"
+    "width",
 ]

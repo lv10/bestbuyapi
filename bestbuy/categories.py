@@ -4,6 +4,7 @@ from bestbuy.api import BestBuyAPI, BestBuyAPIError
 
 class BestBuyCategoryAPIError(BestBuyAPIError):
     """Errors generated before BestBuy servers respond to a call"""
+
     pass
 
 

@@ -4,11 +4,11 @@ from bestbuy.api import BestBuyAPI, BestBuyAPIError
 
 class BestBuyBulkAPIError(BestBuyAPIError):
     """Errors generated before BestBuy servers respond to a call"""
+
     pass
 
 
 class BestBuyBulkAPI(BestBuyAPI):
-
     def _api_name(self):
         return BULK_API
 
@@ -33,10 +33,7 @@ class BestBuyBulkAPI(BestBuyAPI):
              - https://developer.bestbuy.com/documentation/bulkDownload-api
         """
 
-        payload = {
-            'query': "{0}.{1}.zip".format(name, file_format),
-            'params': {}
-        }
+        payload = {"query": "{0}.{1}.zip".format(name, file_format), "params": {}}
 
         return self._call(payload)
 
@@ -67,8 +64,8 @@ class BestBuyBulkAPI(BestBuyAPI):
         """
 
         payload = {
-            'query': "subsets/{0}.{1}.zip".format(subset, file_format),
-            'params': {}
+            "query": "subsets/{0}.{1}.zip".format(subset, file_format),
+            "params": {},
         }
 
         return self._call(payload)

@@ -7,9 +7,14 @@ verify_ssl = true
 ipdb = "*"
 nose = "*"
 bestbuyapi = {editable = true,path = "."}
+coverage = "*"
+black = "*"
 
 [packages]
 requests = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true

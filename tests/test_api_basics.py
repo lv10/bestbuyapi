@@ -1,10 +1,10 @@
+import os
 import json
 import unittest
 import xml.etree.ElementTree as ET
 
-from nose.tools import raises
+from nose.tools import raises, ok_
 
-from config import TEST_API_KEY
 from bestbuy import BestBuyAPIError, BestBuyProductsAPI, BestBuyCategoryAPI
 
 
@@ -12,7 +12,7 @@ class TestAPIBasics(unittest.TestCase):
 
     def setUp(self):
 
-        self.key = TEST_API_KEY
+        self.key = os.getenv("BESTBUY_API_KEY")
 
         # initialize both bestbuy products and categories api both APIs
         # are used arbitrarily to make general tests
@@ -33,15 +33,15 @@ class TestAPIBasics(unittest.TestCase):
         self.category_api._validate_params(payload)
 
     def test_json_response(self):
-
-        query = "sku=9776457"
+        # query = "sku=5985609"
+        query = "accessories.sku=5985609"
         response = self.product_api.search(query=query, format="json")
-        assert type(json.loads(response)) is dict
+
+        ok_(isinstance(json.loads(response), dict), "Response cannot be converted to JSON")
 
     def test_xml_response(self):
-
-        sku_nbr = 7619002
-        query = "sku={0}".format(sku_nbr)
+        sku_nbr = 5985609
+        query = f"sku={sku_nbr}"
 
         # leaving the format blank will default to xml
         response = self.product_api.search(query=query, format="xml")

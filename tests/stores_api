@@ -1,0 +1,25 @@
+import json
+import unittest
+
+from config import TEST_API_KEY
+from bestbuy import BestBuyStoresAPI
+
+
+class TestStoresAPI(unittest.TestCase):
+
+    def setUp(self):
+
+        self.key = os.getenv("BESTBUY_API_KEY")
+
+        self._api_name = "stores"
+        self.bestbuy = BestBuyStoresAPI(self.key)
+
+    def test_search(self):
+
+        storeId = 2387
+        response_format = "json"
+        response = self.bestbuy.search_store(
+            storeId=storeId, format=response_format)
+
+        json_response = json.loads(response)
+        assert (storeId == json_response['stores']['storeId'])

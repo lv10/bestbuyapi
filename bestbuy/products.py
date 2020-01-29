@@ -3,15 +3,12 @@ from bestbuy.constants import PRODUCT_DESCRIPTION_TYPES, PRODUCT_API
 
 
 class BestBuyProductAPIError(BestBuyAPIError):
+    """Errors generated before BestBuy servers respond to a call"""
 
-    """
-        Errors generated before BestBuy servers respond to a call
-    """
     pass
 
 
 class BestBuyProductsAPI(BestBuyAPI):
-
     def _api_name(self):
         return PRODUCT_API
 
@@ -34,10 +31,7 @@ class BestBuyProductsAPI(BestBuyAPI):
         """
         d_type = PRODUCT_DESCRIPTION_TYPES[description_type]
 
-        payload = {
-            'query': "{0}={1}".format(d_type, description),
-            'params': kwargs
-        }
+        payload = {"query": "{0}={1}".format(d_type, description), "params": kwargs}
 
         return self._call(payload)
 
@@ -48,10 +42,7 @@ class BestBuyProductsAPI(BestBuyAPI):
            :param sky: string, with the SKU number of the desired product.
            :param kwargs: dictionary, with request parameters
         """
-        payload = {
-            'query': "sku={0}".format(sku),
-            'params': kwargs
-        }
+        payload = {"query": "sku={0}".format(sku), "params": kwargs}
 
         return self._call(payload)
 
@@ -76,10 +67,7 @@ class BestBuyProductsAPI(BestBuyAPI):
         if review_type == 2:
             review = int(review)
 
-        payload = {
-            'query': "{0}={1}".format(review_type, review),
-            'params': kwargs
-        }
+        payload = {"query": "{0}={1}".format(review_type, review), "params": kwargs}
 
         return self._call(payload)
 
@@ -88,18 +76,13 @@ class BestBuyProductsAPI(BestBuyAPI):
     # =================================
 
     def search(self, query, **kwargs):
+        """Performs a customized search on the BestBuy product API. Query
+        parameters should be passed to function in a dictionary.
+
+        :params:
+            :query (str): String with query parameter. For examples of query
+            check BestBuy documenation at https://goo.gl/jWboE2
+
         """
-            Performs a customized search on the BestBuy product API. Query
-            parameters should be passed to function in a dictionary.
-
-            :param query: String with query parameter. For examples of query
-                          check BestBuy documenation at https://goo.gl/jWboE2
-
-        """
-
-        payload = {
-            'query': query,
-            'params': kwargs
-        }
-
+        payload = {"query": query, "params": kwargs}
         return self._call(payload)

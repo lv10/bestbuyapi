@@ -4,10 +4,7 @@ from bestbuy.constants import API_SEARCH_PARAMS, BASE_URL, BULK_API
 
 
 class BestBuyAPIError(Exception):
-
-    """
-        Errors generated before BestBuy servers respond to a call
-    """
+    """Errors generated before BestBuy servers respond to a call"""
 
     pass
 
@@ -64,9 +61,9 @@ class BestBuyAPI(object):
         # Add key to params
         out["apiKey"] = self.api_key
         if self._api_name() == BULK_API:
-            url = BASE_URL + "{0}".format(query)
+            url = BASE_URL + f"{query}"
         else:
-            url = BASE_URL + "{0}({1})".format(self._api_name(), query)
+            url = BASE_URL + f"{self._api_name()}({query})"
 
         return (url, out)
 
