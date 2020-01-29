@@ -1,5 +1,5 @@
-from main import BestBuyAPI, BestBuyAPIError
-from constants import PRODUCT_DESCRIPTION_TYPES, PRODUCT_API
+from bestbuy.api import BestBuyAPI, BestBuyAPIError
+from bestbuy.constants import PRODUCT_DESCRIPTION_TYPES, PRODUCT_API
 
 
 class BestBuyProductAPIError(BestBuyAPIError):

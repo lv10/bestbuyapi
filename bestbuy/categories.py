@@ -1,16 +1,13 @@
-from constants import CATEGORY_API
-from main import BestBuyAPI, BestBuyAPIError
+from bestbuy.constants import CATEGORY_API
+from bestbuy.api import BestBuyAPI, BestBuyAPIError
 
 
 class BestBuyCategoryAPIError(BestBuyAPIError):
-    """
-        Errors generated before BestBuy servers respond to a call
-    """
+    """Errors generated before BestBuy servers respond to a call"""
     pass
 
 
 class BestBuyCategoryAPI(BestBuyAPI):
-
     def _api_name(self):
         return CATEGORY_API
 
@@ -27,10 +24,7 @@ class BestBuyCategoryAPI(BestBuyAPI):
                           check BestBuy documenation at https://goo.gl/ZH5mnP
         """
 
-        payload = {
-            'query': query,
-            'params': kwargs
-        }
+        payload = {"query": query, "params": kwargs}
 
         return self._call(payload)
 
@@ -42,10 +36,7 @@ class BestBuyCategoryAPI(BestBuyAPI):
             :param kwargs: dictionary, with request parameters
         """
 
-        payload = {
-            'query': "id={0}".format(category_id),
-            'params': kwargs
-        }
+        payload = {"query": "id={0}".format(category_id), "params": kwargs}
 
         return self._call(payload)
 
@@ -57,9 +48,6 @@ class BestBuyCategoryAPI(BestBuyAPI):
             :param kwargs: dictionary, with request parameters
         """
 
-        payload = {
-            'query': "name={0}".format(category),
-            'params': kwargs
-        }
+        payload = {"query": "name={0}".format(category), "params": kwargs}
 
         return self._call(payload)

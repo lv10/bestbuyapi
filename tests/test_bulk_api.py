@@ -1,6 +1,6 @@
 import zipfile
 import unittest
-from StringIO import StringIO
+from io import StringIO
 
 from bestbuy import BASE_URL
 from bestbuy import BestBuyBulkAPI

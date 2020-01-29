@@ -1,12 +1,9 @@
-from constants import BULK_API
-from main import BestBuyAPI, BestBuyAPIError
+from bestbuy.constants import BULK_API
+from bestbuy.api import BestBuyAPI, BestBuyAPIError
 
 
 class BestBuyBulkAPIError(BestBuyAPIError):
-
-    """
-        Errors generated before BestBuy servers respond to a call
-    """
+    """Errors generated before BestBuy servers respond to a call"""
     pass
 
 

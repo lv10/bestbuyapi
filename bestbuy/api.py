@@ -1,6 +1,6 @@
 import requests
 
-from constants import API_SEARCH_PARAMS, BASE_URL, BULK_API
+from bestbuy.constants import API_SEARCH_PARAMS, BASE_URL, BULK_API
 
 
 class BestBuyAPIError(Exception):
@@ -8,11 +8,11 @@ class BestBuyAPIError(Exception):
     """
         Errors generated before BestBuy servers respond to a call
     """
+
     pass
 
 
 class BestBuyAPI(object):
-
     def __init__(self, api_key):
         """
             :param api_key: best buy developer API key.
@@ -31,7 +31,7 @@ class BestBuyAPI(object):
         url, valid_payload = self._build_url(valid_payload)
         request = requests.get(url, params=valid_payload)
 
-        if request.headers['content-type'] == "text/json":
+        if request.headers["content-type"] == "text/json":
             return request.json()
 
         return request.content
@@ -52,21 +52,17 @@ class BestBuyAPI(object):
                     the parameters pre-processed for a API call to be made.
         """
 
-        query = payload['query']
-
+        query = payload["query"]
         # Pre-process paramenters before submitting payload.
-
         out = dict()
-
-        for key, value in payload['params'].iteritems():
-            if type(value) is list:
+        for key, value in payload["params"].items():
+            if isinstance(value, list):
                 out[key] = ",".join(value)
             else:
                 out[key] = value
 
         # Add key to params
-        out['apiKey'] = self.api_key
-
+        out["apiKey"] = self.api_key
         if self._api_name() == BULK_API:
             url = BASE_URL + "{0}".format(query)
         else:
@@ -83,11 +79,10 @@ class BestBuyAPI(object):
                             a request.
         """
 
-        for key, value in payload['params'].iteritems():
+        for key, value in payload["params"].items():
 
             if key not in API_SEARCH_PARAMS:
-                err_msg = ("{0} is an invalid Product"
-                           " Search Parameter".format(key))
+                err_msg = "{0} is an invalid Product" " Search Parameter".format(key)
                 raise BestBuyAPIError(err_msg)
 
             if value is None:
