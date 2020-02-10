@@ -12,6 +12,7 @@ black = "*"
 
 [packages]
 requests = "*"
+chardet = "*"
 
 [requires]
 python_version = "3.6"

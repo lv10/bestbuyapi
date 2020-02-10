@@ -1,5 +1,5 @@
-from main import BestBuyAPI, BestBuyAPIError
-from constants import STORES_API
+from bestbuy.api import BestBuyAPI, BestBuyAPIError
+from bestbuy.constants import STORES_API
 
 
 class BestBuyStoresAPIError(BestBuyAPIError):
@@ -9,6 +9,7 @@ class BestBuyStoresAPIError(BestBuyAPIError):
 
 
 class BestBuyStoresAPI(BestBuyAPI):
+
     def _api_name(self):
         return STORES_API
 
@@ -16,7 +17,7 @@ class BestBuyStoresAPI(BestBuyAPI):
     #   Search by store by name or id
     # =================================
 
-    def search_store(self, **kwargs):
-        """Searches the stores api given an id or name"""
-        payload = {"params": kwargs, "query": ""}
+    def search_by_id(self, store_id, **kwargs):
+        """Searches the stores api given an id"""
+        payload = {"query": f"storeId={store_id}", "params": kwargs}
         return self._call(payload)

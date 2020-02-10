@@ -3,6 +3,8 @@ import zipfile
 import unittest
 from io import StringIO
 
+from nose.tools import ok_
+
 from bestbuy import BASE_URL, BestBuyBulkAPI
 
 
@@ -14,41 +16,26 @@ class TestBulkAPI(unittest.TestCase):
         self.bestbuy = BestBuyBulkAPI(self.key)
 
     def test_build_url(self):
-
-        sample_url = "{0}products.xml.zip".format(BASE_URL)
-
+        sample_url = f"{BASE_URL}products.xml.zip"
         payload = {
             'query': "products.xml.zip",
             'params': {}
         }
-
         url, thePayload = self.bestbuy._build_url(payload)
-
-        assert sample_url == url
-        assert thePayload.get('apiKey') is not None
+        ok_(sample_url == url, "URL construction has issues")
+        ok_(thePayload.get('apiKey') is not None, "API Key is None")
 
     def test_archive(self):
-
         archive_name = "categories"
         file_format = "xml"
-
         response = self.bestbuy.archive(archive_name, file_format)
-        the_zipfile = zipfile.ZipFile(StringIO(response))
-
-        # This test will fail if there's a bad file in the zip file or if
-        # if the zip file comes back empty
-        assert the_zipfile.testzip() is None
-        assert the_zipfile.namelist() > 0
+        ok_(len(response) >= 1, "Response is empty")
+        for _, data in response.items():
+            ok_(isinstance(data, bytes), "XML data response is not bytes")
 
     def test_archive_subset(self):
-
         subset_name = "productsSoftware"
         file_format = "json"
-
         response = self.bestbuy.archive_subset(subset_name, file_format)
-        the_zipfile = zipfile.ZipFile(StringIO(response))
-
-        # This test will fail if there's a bad file in the zip file or if
-        # if the zip file comes back empty
-        assert the_zipfile.testzip() is None
-        assert the_zipfile.namelist() > 0
+        ok_(isinstance(response, dict) is True,"Response type is not a dict")
+        ok_(len(response) >= 1,"Response is empty")

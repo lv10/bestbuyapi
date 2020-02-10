@@ -17,33 +17,28 @@ class BestBuyProductsAPI(BestBuyAPI):
     # =================================
 
     def search_by_description(self, description_type, description, **kwargs):
-        """
-            Searches the product API using description parameter
-
-            :param description_type: Integer from 1 to 4 to determine the type
-                                     of description the call is going to use.
-                                     The integers represent:
-                                     - 1: name
-                                     - 2: description
-                                     - 3: shortDescription
-                                     - 4: longDescription
-            :param description: String with the actual description's content.
+        """Searches the product API using description parameter
+        :params:
+            :description_type (int): Integer from 1 to 4 to determine the type
+                of description the call is going to use.
+                The integers represent:
+                    - 1: name
+                    - 2: description
+                    - 3: shortDescription
+                    - 4: longDescription
+            :description (str): description's content.
         """
         d_type = PRODUCT_DESCRIPTION_TYPES[description_type]
-
         payload = {"query": "{0}={1}".format(d_type, description), "params": kwargs}
-
         return self._call(payload)
 
     def search_by_sku(self, sku, **kwargs):
-        """
-            Search the product API by SKU
-
-           :param sky: string, with the SKU number of the desired product.
-           :param kwargs: dictionary, with request parameters
+        """Search the product API by SKU
+        :params:
+            :sky (str): SKU number of the desired product.
+            :kwargs (dict): request parameters
         """
         payload = {"query": "sku={0}".format(sku), "params": kwargs}
-
         return self._call(payload)
 
     def search_by_review_criteria(self, review_type, review, **kwargs):
@@ -63,12 +58,9 @@ class BestBuyProductsAPI(BestBuyAPI):
                              greater than 0.
 
         """
-
         if review_type == 2:
             review = int(review)
-
         payload = {"query": "{0}={1}".format(review_type, review), "params": kwargs}
-
         return self._call(payload)
 
     # =================================

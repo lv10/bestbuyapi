@@ -37,18 +37,15 @@ class BestBuyCategoryAPI(BestBuyAPI):
             :param kwargs: dictionary, with request parameters
         """
 
-        payload = {"query": "id={0}".format(category_id), "params": kwargs}
+        payload = {"query": f"id={category_id}", "params": kwargs}
 
         return self._call(payload)
 
     def search_by_name(self, category, **kwargs):
+        """Search the category API by name
+        :params:
+            :name (str): string, with the name of the desired category.
+            :kwargs (dict): dictionary, with request parameters
         """
-            Search the category API by name
-
-            :param name: string, with the name of the desired category.
-            :param kwargs: dictionary, with request parameters
-        """
-
         payload = {"query": "name={0}".format(category), "params": kwargs}
-
         return self._call(payload)

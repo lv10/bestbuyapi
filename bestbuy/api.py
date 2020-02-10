@@ -1,6 +1,6 @@
 import requests
 
-from bestbuy.constants import API_SEARCH_PARAMS, BASE_URL, BULK_API
+from bestbuy.constants import API_SEARCH_PARAMS, BASE_URL, BULK_API, STORE_SEARCH_PARAMS, PRODUCT_SEARCH_PARAMS
 
 
 class BestBuyAPIError(Exception):
@@ -11,8 +11,9 @@ class BestBuyAPIError(Exception):
 
 class BestBuyAPI(object):
     def __init__(self, api_key):
-        """
-            :param api_key: best buy developer API key.
+        """API's base class
+        :params:
+        :api_key (str): best buy developer API key.
         """
         self.api_key = api_key.strip()
 
@@ -75,10 +76,11 @@ class BestBuyAPI(object):
             :param payload: dictionary, with the parameters to be used to make
                             a request.
         """
-
         for key, value in payload["params"].items():
+            # TODO: Use a class variable to load the appropiate validation list of params
+            VALID_PARAMS = API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
 
-            if key not in API_SEARCH_PARAMS:
+            if key not in VALID_PARAMS:
                 err_msg = "{0} is an invalid Product" " Search Parameter".format(key)
                 raise BestBuyAPIError(err_msg)
 

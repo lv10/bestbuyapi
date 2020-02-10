@@ -3,7 +3,7 @@
 # ======================================
 
 API_VERSION = "v1"
-BASE_URL = f"http://api.bestbuy.com/{API_VERSION}/"
+BASE_URL = f"https://api.bestbuy.com/{API_VERSION}/"
 
 # ======================================
 #             API Names
@@ -12,6 +12,7 @@ BASE_URL = f"http://api.bestbuy.com/{API_VERSION}/"
 PRODUCT_API = "products"
 CATEGORY_API = "categories"
 BULK_API = "bulk"
+STORES_API = "stores"
 
 # ======================================
 #    Product Search Description Types
@@ -120,4 +121,25 @@ PRODUCT_SEARCH_PARAMS = [
     "warrantyParts",
     "weight",
     "width",
+]
+
+
+STORE_SEARCH_PARAMS = [
+    "Attribute",
+    "address" ,
+    "address2",
+    "city",
+    "country",
+    "distance",
+    "fullPostalCode",
+    "lat",
+    "lng",
+    "location",
+    "longName",
+    "name",
+    "phone",
+    "postalCode",
+    "region",
+    "storeId",
+    "storeType"
 ]

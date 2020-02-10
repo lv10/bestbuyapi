@@ -1,4 +1,5 @@
 from bestbuy.api import BestBuyAPIError
+from bestbuy.stores import BestBuyStoresAPI
 from bestbuy.bulk import BestBuyBulkAPI, BestBuyBulkAPIError
 from bestbuy.products import BestBuyProductsAPI, BestBuyProductAPIError
 from bestbuy.categories import BestBuyCategoryAPI, BestBuyCategoryAPIError
