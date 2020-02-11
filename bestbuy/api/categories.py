@@ -19,9 +19,7 @@ class BestBuyCategoryAPI(BestBuyCore):
             :param query: String with query parameter. For examples of query
                           check BestBuy documenation at https://goo.gl/ZH5mnP
         """
-
         payload = {"query": query, "params": kwargs}
-
         return self._call(payload)
 
     def search_by_id(self, category_id, **kwargs):

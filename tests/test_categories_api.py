@@ -29,9 +29,8 @@ class TestCategoryAPI(unittest.TestCase):
         cat_id = "cat00000"
         query = f"id={cat_id}"
         response = self.bbapi.category.search(query=query, show="id", format="json")
-        json_response = json.loads(response)
         ok_(
-            json_response["categories"][0]["id"] == cat_id,
+            response["categories"][0]["id"] == cat_id,
             "Returned category id is different",
         )
 
@@ -39,8 +38,7 @@ class TestCategoryAPI(unittest.TestCase):
         cat_name = "Sony"
         query = f"name={cat_name}"
         response = self.bbapi.category.search(query=query, format="json")
-        json_response = json.loads(response)
         ok_(
-            json_response["categories"][0]["name"] == cat_name,
+            response["categories"][0]["name"] == cat_name,
             "Category name returned is different",
         )

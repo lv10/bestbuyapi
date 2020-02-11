@@ -28,10 +28,7 @@ class TestAPIBasics(unittest.TestCase):
     def test_json_response(self):
         query = "accessories.sku=5985609"
         response = self.bbapi.products.search(query=query, format="json")
-        ok_(
-            isinstance(json.loads(response), dict),
-            "Response cannot be converted to JSON",
-        )
+        ok_(isinstance(response, dict), "Response cannot be converted to JSON")
 
     def test_xml_response(self):
         sku_nbr = 5985609

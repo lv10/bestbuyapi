@@ -1,7 +1,9 @@
 Python Best Buy API Wrapper
 ===========================
 
-.. image:: https://img.shields.io/badge/version-0.1.0-blue.svg
+.. image:: https://img.shields.io/badge/version-1.0.0-blue.svg
+.. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=dev
+    :target: https://travis-ci.com/lv10/bestbuyapi
 
 
 This is a small python wrapper implementation for BestBuy API. This implementation
@@ -22,6 +24,7 @@ Features
 --------
 
 - Query Bulk BestBuy API
+- Query Stores BestBuy API (by id, currently)
 - Query Products BestBuy API
 - Query Categories BestBuy API
 - Obtain queries result in JSON or XML
@@ -37,34 +40,17 @@ Install
     $ pip install BestBuyAPI
 
 
-How to Product and Category APIs
+How to use Product, Category, Store and Bulk APIs
 --------------------------------
 
 .. code-block:: python
 
-    >>> from bestbuy import BestBuyProductsAPI, BestBuyCategoryAPI
-    >>> bb_prod = BestBuyProductsAPI("YourSecretAPIKey")
-    >>> bb_cat = BestBuyCategoryAPI("YourSecretAPIKey")
+    >>> from bestbuy import BestBuy
+    >>> bb = BestBuy("YourSecretAPIKey")
     >>>
-    >>> bb_prod.search(query="sku=9776457", format="json")
-    >>> bb_cat.search_by_id(category_id="abcat0011001", format="json")
-
-
-How to Bulk API
----------------
-
-.. code-block:: python
-
-    >>> from bestbuy import BestBuyBulkAPI
-    >>> import zipfile, StringIO
-    >>> #import zipfile, io --> For python 3+
-    >>>
-    >>> bb_bulk = BestBuyBulkAPI("YourSecretAPIKey")
-    >>>
-    >>> response = bb_bulk.archive("categories", "json")
-    >>> zip_file = zipfile.ZipFile(StringIO.StringIO(response))
-    >>> # zip_file = zipfile.ZipFile(io.BytesIO(response)) --> For python 3+
-    >>> zip_file.extractall()
+    >>> a_prod = bb.products.search(query="sku=9776457", format="json")
+    >>> a_cat = bb.category.search_by_id(category_id="abcat0011001", format="json")
+    >>> all_categories = bb.bulk.archive("categories", "json")
 
 
 FAQ

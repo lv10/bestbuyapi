@@ -30,7 +30,7 @@ class BestBuyCore(object):
         url, valid_payload = self._build_url(valid_payload)
         request = requests.get(url, params=valid_payload)
 
-        if request.headers["content-type"] == "text/json":
+        if "json" in request.headers["Content-Type"]:
             return request.json()
 
         return request.content

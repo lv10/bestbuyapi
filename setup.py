@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="BestBuyAPI",
-    version="0.1.0",
+    version="1.0.0",
     description="Best Buy API Wrapper",
     url="https://github.com/lv10/bestbuyapi",
     author="lv10",
@@ -11,7 +11,7 @@ setup(
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
     ],
     packages=find_packages(exclude=["tests"]),
     install_requires=["requests"],

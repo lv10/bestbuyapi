@@ -17,5 +17,4 @@ class TestStoresAPI(unittest.TestCase):
         store_id = 281
         response_format = "json"
         response = self.bbapi.stores.search_by_id(store_id=store_id, format=response_format)
-        json_response = json.loads(response)
-        ok_(store_id == json_response["stores"][0]["storeId"], "Store by id not found")
+        ok_(store_id == response["stores"][0]["storeId"], "Store by id not found")
