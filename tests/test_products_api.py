@@ -4,7 +4,7 @@ import unittest
 
 from nose.tools import ok_
 
-from bestbuy import BASE_URL, BestBuyProductsAPI
+from bestbuy import BASE_URL, BestBuyAPI
 
 
 class TestProductsAPI(unittest.TestCase):
@@ -12,13 +12,13 @@ class TestProductsAPI(unittest.TestCase):
 
         self.key = os.getenv("BESTBUY_API_KEY")
         self._api_name = "products"
-        self.bestbuy = BestBuyProductsAPI(self.key)
+        self.bbapi = BestBuyAPI(self.key)
 
     def test_search_by_description(self):
         description_type = 1
         description = "iphone*"
         response_format = "json"
-        response = self.bestbuy.search_by_description(
+        response = self.bbapi.products.search_by_description(
             description_type=description_type,
             description=description,
             format=response_format,
@@ -29,7 +29,7 @@ class TestProductsAPI(unittest.TestCase):
 
     def test_search_by_sku(self):
         sku_nbr = 5706617
-        response = self.bestbuy.search_by_sku(sku=sku_nbr, format="json")
+        response = self.bbapi.products.search_by_sku(sku=sku_nbr, format="json")
         json_response = json.loads(response)
         ok_(
             sku_nbr == json_response["products"][0]["sku"],
@@ -38,6 +38,6 @@ class TestProductsAPI(unittest.TestCase):
 
     def test_search(self):
         query = "sku in(5706617,6084400,2088495)"
-        result = self.bestbuy.search(query=query, format="json")
+        result = self.bbapi.products.search(query=query, format="json")
         json_response = json.loads(result)
         ok_(json_response["total"] >= 2, "general search is failing to complete")

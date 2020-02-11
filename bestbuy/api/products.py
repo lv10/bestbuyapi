@@ -1,14 +1,10 @@
-from bestbuy.api import BestBuyAPI, BestBuyAPIError
+from bestbuy.api.base import BestBuyCore
+from bestbuy.utils.exceptions import BestBuyProductAPIError
 from bestbuy.constants import PRODUCT_DESCRIPTION_TYPES, PRODUCT_API
 
 
-class BestBuyProductAPIError(BestBuyAPIError):
-    """Errors generated before BestBuy servers respond to a call"""
 
-    pass
-
-
-class BestBuyProductsAPI(BestBuyAPI):
+class BestBuyProductsAPI(BestBuyCore):
     def _api_name(self):
         return PRODUCT_API
 

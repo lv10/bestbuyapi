@@ -1,15 +1,16 @@
 import requests
 
-from bestbuy.constants import API_SEARCH_PARAMS, BASE_URL, BULK_API, STORE_SEARCH_PARAMS, PRODUCT_SEARCH_PARAMS
+from bestbuy.utils.exceptions import BestBuyAPIError
+from bestbuy.constants import (
+    API_SEARCH_PARAMS,
+    BASE_URL,
+    BULK_API,
+    STORE_SEARCH_PARAMS,
+    PRODUCT_SEARCH_PARAMS,
+)
 
 
-class BestBuyAPIError(Exception):
-    """Errors generated before BestBuy servers respond to a call"""
-
-    pass
-
-
-class BestBuyAPI(object):
+class BestBuyCore(object):
     def __init__(self, api_key):
         """API's base class
         :params:
@@ -78,7 +79,9 @@ class BestBuyAPI(object):
         """
         for key, value in payload["params"].items():
             # TODO: Use a class variable to load the appropiate validation list of params
-            VALID_PARAMS = API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
+            VALID_PARAMS = (
+                API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
+            )
 
             if key not in VALID_PARAMS:
                 err_msg = "{0} is an invalid Product" " Search Parameter".format(key)

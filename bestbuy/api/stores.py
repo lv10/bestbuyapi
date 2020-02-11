@@ -1,14 +1,9 @@
-from bestbuy.api import BestBuyAPI, BestBuyAPIError
+from bestbuy.api.base import BestBuyCore
 from bestbuy.constants import STORES_API
+from bestbuy.utils.exceptions import BestBuyStoresAPIError
 
 
-class BestBuyStoresAPIError(BestBuyAPIError):
-    """Errors before BestBuy servers respond to a call to the stores API"""
-
-    pass
-
-
-class BestBuyStoresAPI(BestBuyAPI):
+class BestBuyStoresAPI(BestBuyCore):
 
     def _api_name(self):
         return STORES_API

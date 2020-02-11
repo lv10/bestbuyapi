@@ -3,16 +3,11 @@ import zipfile
 from io import BytesIO
 
 from bestbuy.constants import BULK_API
-from bestbuy.api import BestBuyAPI, BestBuyAPIError
+from bestbuy.api.base import BestBuyCore
+from bestbuy.utils.exceptions import BestBuyBulkAPIError
 
 
-class BestBuyBulkAPIError(BestBuyAPIError):
-    """Errors generated before BestBuy servers respond to a call"""
-
-    pass
-
-
-class BestBuyBulkAPI(BestBuyAPI):
+class BestBuyBulkAPI(BestBuyCore):
     def _api_name(self):
         return BULK_API
 
