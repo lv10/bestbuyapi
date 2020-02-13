@@ -2,8 +2,8 @@ import sys
 from setuptools import setup, find_packages
 
 ERROR_UNSUPPORTED_PYTHON = f'BestBuyApi only supports Python 3.6 or later'
-PY36_OR_OLDER = sys.version_info < (3, 6)
-if PY37_OR_LATER:
+PY35_OR_OLDER = sys.version_info < (3, 6)
+if PY35_OR_OLDER:
     raise Exception(UNSUPPORTED_PYTHON)
 
 setup(
