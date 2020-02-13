@@ -2,13 +2,13 @@ Python Best Buy API Wrapper
 ===========================
 
 .. image:: https://img.shields.io/badge/version-1.0.0-blue.svg
-.. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=dev
+.. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=prod
     :target: https://travis-ci.com/lv10/bestbuyapi
 
 
 This is a small python wrapper implementation for BestBuy API. This implementation
 does not cover all the APIs from BestBuy yet. As of now, it only supports the
-calls to the Products API and Categories API. Locations and Reviews API are in the
+calls to the Products, Categories, bulk and Cover APIs. Locations and Reviews API are in the
 making.
 
 The wrapper doesn't assume any design requirements on the user end. Queries to
@@ -16,9 +16,8 @@ the API endpoints are done similar to what you would put in the browser with the
 convenience of having python prepare for you the query, url, and interpret the
 response.
 
-NOTICE: This is a python library in the making. New features and bug fixes will
-be included. Feel free to add change anything you consider could be better or
-could extend the functionality of the library.
+NOTICE: This project is only supported by python 3.6, 3.7, 3.8. If you need support for
+an older version of python3, please reach out to me.
 
 Features
 --------

@@ -11,6 +11,9 @@ from bestbuy.utils.exceptions import (
 )
 
 
+__version__ = "1.0.0"
+
+
 class BestBuyAPI:
 
   def __init__(self, api_key):
