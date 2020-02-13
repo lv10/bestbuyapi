@@ -2,7 +2,7 @@ Python Best Buy API Wrapper
 ===========================
 
 .. image:: https://img.shields.io/badge/version-1.0.0-blue.svg
-.. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=prod
+.. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=master
     :target: https://travis-ci.com/lv10/bestbuyapi
 
 
