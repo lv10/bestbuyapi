@@ -44,8 +44,8 @@ How to use Product, Category, Store and Bulk APIs
 
 .. code-block:: python
 
-    >>> from bestbuy import BestBuy
-    >>> bb = BestBuy("YourSecretAPIKey")
+    >>> from bestbuy import BestBuyAPI
+    >>> bb = BestBuyAPI("YourSecretAPIKey")
     >>>
     >>> a_prod = bb.products.search(query="sku=9776457", format="json")
     >>> a_cat = bb.category.search_by_id(category_id="abcat0011001", format="json")
