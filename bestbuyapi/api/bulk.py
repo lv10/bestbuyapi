@@ -2,9 +2,9 @@ import json
 import zipfile
 from io import BytesIO
 
-from bestbuy.constants import BULK_API
-from bestbuy.api.base import BestBuyCore
-from bestbuy.utils.exceptions import BestBuyBulkAPIError
+from ..constants import BULK_API
+from ..api.base import BestBuyCore
+from ..utils.exceptions import BestBuyBulkAPIError
 
 
 class BestBuyBulkAPI(BestBuyCore):
@@ -39,16 +39,16 @@ class BestBuyBulkAPI(BestBuyCore):
         :params:
             :name (str): Archive type. The archive type supported are:
                 - productsActive
-                - productsInactive
-                - productsMusic
-                - productsMovie
-                - productsHardgood
-                - productsBundle
-                - productsGame
-                - productsSoftware
-                - productsBlackTie
-                - productsMarketplace
-                - productsDigital
+                - productsInactive (Currently empty or deprecated)
+                - productsMusic (Currently empty or deprecated)
+                - productsMovie (Currently empty or deprecated)
+                - productsHardgood (Currently empty or deprecated)
+                - productsBundle (Currently empty or deprecated)
+                - productsGame (Currently empty or deprecated)
+                - productsSoftware (Currently empty or deprecated)
+                - productsBlackTie (Currently empty or deprecated)
+                - productsMarketplace (Currently empty or deprecated)
+                - productsDigital (Currently empty or deprecated)
 
             :file_format (str): File format in which the archive is to be downloaded.
                 - xml

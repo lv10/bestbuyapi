@@ -1,14 +1,14 @@
 ---
-
 language: python
 
 python:
-    - "3.6"
-    - "3.7"
-    - "3.8"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.9"
 
 install:
-    - pipenv install
+  - poetry install
 
 script:
-    - nosetests -x -v -s tests/ --cover-package=bestbuy --with-coverage
+  - pytest --cov=bestbuy tests/ -sv

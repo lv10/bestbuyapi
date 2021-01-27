@@ -126,7 +126,7 @@ PRODUCT_SEARCH_PARAMS = [
 
 STORE_SEARCH_PARAMS = [
     "Attribute",
-    "address" ,
+    "address",
     "address2",
     "city",
     "country",
@@ -141,5 +141,5 @@ STORE_SEARCH_PARAMS = [
     "postalCode",
     "region",
     "storeId",
-    "storeType"
+    "storeType",
 ]

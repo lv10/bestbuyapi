@@ -1,7 +1,7 @@
 import requests
 
-from bestbuy.utils.exceptions import BestBuyAPIError
-from bestbuy.constants import (
+from ..utils.exceptions import BestBuyAPIError
+from ..constants import (
     API_SEARCH_PARAMS,
     BASE_URL,
     BULK_API,
@@ -20,11 +20,11 @@ class BestBuyCore(object):
 
     def _call(self, payload):
         """
-            Actual call ot the Best Buy API.
+        Actual call ot the Best Buy API.
 
-            :rType:
-                - JSON
-                - Text/String
+        :rType:
+            - JSON
+            - Text/String
         """
         valid_payload = self._validate_params(payload)
         url, valid_payload = self._build_url(valid_payload)
@@ -40,15 +40,15 @@ class BestBuyCore(object):
 
     def _build_url(self, payload):
         """
-            Receives a payload (dict) with the necessary params to make a call
-            to the Best Buy API and returns a string URL that includes the
-            query and the dict parameters pre-processed for a API call to be
-            made.
+        Receives a payload (dict) with the necessary params to make a call
+        to the Best Buy API and returns a string URL that includes the
+        query and the dict parameters pre-processed for a API call to be
+        made.
 
-            :param paylod: dictionary with request parameters
+        :param paylod: dictionary with request parameters
 
-            :rType: tuple that contains the url that includes the query and
-                    the parameters pre-processed for a API call to be made.
+        :rType: tuple that contains the url that includes the query and
+                the parameters pre-processed for a API call to be made.
         """
 
         query = payload["query"]
@@ -71,17 +71,15 @@ class BestBuyCore(object):
 
     def _validate_params(self, payload):
         """
-            Validate parameters, double check that there are no None values
-            in the keys.
+        Validate parameters, double check that there are no None values
+        in the keys.
 
-            :param payload: dictionary, with the parameters to be used to make
-                            a request.
+        :param payload: dictionary, with the parameters to be used to make
+                        a request.
         """
         for key, value in payload["params"].items():
             # TODO: Use a class variable to load the appropiate validation list of params
-            VALID_PARAMS = (
-                API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
-            )
+            VALID_PARAMS = API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
 
             if key not in VALID_PARAMS:
                 err_msg = "{0} is an invalid Product" " Search Parameter".format(key)

@@ -1,10 +1,9 @@
-from bestbuy.api.base import BestBuyCore
-from bestbuy.constants import STORES_API
-from bestbuy.utils.exceptions import BestBuyStoresAPIError
+from ..api.base import BestBuyCore
+from ..constants import STORES_API
+from ..utils.exceptions import BestBuyStoresAPIError
 
 
 class BestBuyStoresAPI(BestBuyCore):
-
     def _api_name(self):
         return STORES_API
 
