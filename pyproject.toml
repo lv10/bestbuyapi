@@ -31,6 +31,7 @@ requests = "^2.25.1"
 ipdb = "^0.13.4"
 pytest = "^6.2.2"
 pytest-cov = "^2.11.1"
+tox = "^3.21.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools", "wheel"]

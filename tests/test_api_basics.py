@@ -26,5 +26,5 @@ def test_xml_response(bbapi):
     # leaving the format blank will default to xml
     response = bbapi.products.search(query=query, format="xml")
     xml_tree = ET.fromstring(response)
-    response_sku = xml_tree.getchildren()[0].findall("sku")[0].text
+    response_sku = xml_tree[0].findall("sku")[0].text
     assert int(response_sku) == sku_nbr, "XML Response parsing is failing"
