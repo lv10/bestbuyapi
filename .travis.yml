@@ -15,4 +15,4 @@ install:
   - pip install tox-travis
 
 script:
-  - poetry tox
+  - tox
