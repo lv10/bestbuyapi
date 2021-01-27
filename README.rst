@@ -1,7 +1,7 @@
 Python Best Buy API Wrapper
 ===========================
 
-.. image:: https://img.shields.io/badge/version-1.0.0-blue.svg
+.. image:: https://img.shields.io/badge/version-2.0.0-blue.svg
 .. image:: https://travis-ci.com/lv10/bestbuyapi.svg?branch=master
     :target: https://travis-ci.com/lv10/bestbuyapi
 
@@ -43,7 +43,6 @@ How to use Product, Category, Store and Bulk APIs
 --------------------------------
 
 .. code-block:: python
-
     >>> from bestbuy import BestBuyAPI
     >>> bb = BestBuyAPI("YourSecretAPIKey")
     >>>
