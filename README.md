@@ -1,7 +1,8 @@
 # Python Best Buy API Wrapper
 
 ![image](https://img.shields.io/badge/version-2.1.0-blue.svg)
-[![CI](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml)
+[![CI Main](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml?query=branch%3Amain)
+[![CI Dev](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml?query=branch%3Adev)
 
 This is a small python wrapper implementation for BestBuy API.
 
