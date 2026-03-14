@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v2.1.1 (2026-03-14)
+
+### Bug Fixes
+
+- **ci**: Fix semantic-release token, uv paths, pre-commit prettier, PyPI publish condition, and
+  stale pip config
+  ([`eea8011`](https://github.com/lv10/bestbuyapi/commit/eea8011f36e7e30c5003194ae843c6169df44aa3))
+
+
 ## v2.1.0 (2026-03-14)
 
 ### Bug Fixes
