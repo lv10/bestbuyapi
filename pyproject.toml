@@ -39,6 +39,8 @@ dev = [
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
+version_variable = ["bestbuyapi/__init__.py:__version__"]
+tag_format = "{version}"
 build_command = "uv build"
 
 [tool.semantic_release.branches.main]
