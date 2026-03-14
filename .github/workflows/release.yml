@@ -18,18 +18,39 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync --all-extras --dev
 
       - name: Python Semantic Release
         id: release
-        uses: python-semantic-release/python-semantic-release@v9.15.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions [bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # We run versioning and publishing manually via uv to ensure it has access to the environment
+          uv run semantic-release -v version
+
+          # Check if a new version was released by looking for built dist files
+          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+          fi
+
+          uv run semantic-release -v publish
 
       - name: Publish to PyPI
         if: steps.release.outputs.released == 'true'
         run: uv publish
         env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }} # Fallback if Trusted Publishing is not set
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
