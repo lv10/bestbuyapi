@@ -39,6 +39,7 @@ dev = [
 
 [tool.semantic_release]
 version_toml = ["pyproject.toml:project.version"]
+tag_format = "{version}"
 build_command = "uv build"
 
 [tool.semantic_release.branches.main]
