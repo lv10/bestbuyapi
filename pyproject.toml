@@ -78,7 +78,7 @@ default_bump_level = 0
 [tool.semantic_release.remote]
 name = "origin"
 type = "github"
-token = "GH_TOKEN"
+token = { env = "GH_TOKEN" }
 
 [tool.semantic_release.publish]
 dist_glob_patterns = ["dist/*"]
