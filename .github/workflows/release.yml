@@ -41,12 +41,13 @@ jobs:
 
           # We run versioning and publishing manually via uv to ensure it has access to the environment
           uv run semantic-release -v version
-          uv run semantic-release -v publish
 
-          # Set output for the next step
-          if [ -f ".release_version" ]; then
+          # Check if a new version was released by looking for built dist files
+          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
             echo "released=true" >> $GITHUB_OUTPUT
           fi
+
+          uv run semantic-release -v publish
 
       - name: Publish to PyPI
         if: steps.release.outputs.released == 'true'
