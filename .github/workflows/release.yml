@@ -1,0 +1,35 @@
+name: Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    concurrency: release
+    environment: pypi
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Python Semantic Release
+        id: release
+        uses: python-semantic-release/python-semantic-release@v9.15.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to PyPI
+        if: steps.release.outputs.released == 'true'
+        run: uv publish
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }} # Fallback if Trusted Publishing is not set
