@@ -38,11 +38,11 @@ jobs:
         run: |
           git config --global user.name "github-actions [bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # We run versioning and publishing manually via uv to ensure it has access to the environment
           uv run semantic-release -v version
           uv run semantic-release -v publish
-          
+
           # Set output for the next step
           if [ -f ".release_version" ]; then
             echo "released=true" >> $GITHUB_OUTPUT
