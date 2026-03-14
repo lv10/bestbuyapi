@@ -1,92 +1,89 @@
-import requests
+from typing import Any, Dict, Optional, Tuple
 
+import httpx
+
+from ..constants import ALL_VALID_PARAMS, BASE_URL, BULK_API
 from ..utils.exceptions import BestBuyAPIError
-from ..constants import (
-    API_SEARCH_PARAMS,
-    BASE_URL,
-    BULK_API,
-    STORE_SEARCH_PARAMS,
-    PRODUCT_SEARCH_PARAMS,
-)
 
 
-class BestBuyCore(object):
-    def __init__(self, api_key):
+class BestBuyCore:
+    def __init__(
+        self,
+        api_key: str,
+        client: Optional[httpx.Client] = None,
+        aclient: Optional[httpx.AsyncClient] = None,
+    ):
         """API's base class
         :params:
         :api_key (str): best buy developer API key.
+        :client (httpx.Client): optional persistent sync client.
+        :aclient (httpx.AsyncClient): optional persistent async client.
         """
         self.api_key = api_key.strip()
+        self.client = client
+        self.aclient = aclient
 
-    def _call(self, payload):
+    def _call(self, payload: Dict[str, Any]) -> Any:
         """
-        Actual call ot the Best Buy API.
-
-        :rType:
-            - JSON
-            - Text/String
+        Actual call to the Best Buy API.
         """
         valid_payload = self._validate_params(payload)
-        url, valid_payload = self._build_url(valid_payload)
-        request = requests.get(url, params=valid_payload)
+        url, params = self._build_url(valid_payload)
 
-        if "json" in request.headers["Content-Type"]:
-            return request.json()
+        if self.client:
+            response = self.client.get(url, params=params)
+            return self._handle_response(response)
 
-        return request.content
+        with httpx.Client() as client:
+            response = client.get(url, params=params)
+            return self._handle_response(response)
 
-    def _api_name(self):
+    async def _acall(self, payload: Dict[str, Any]) -> Any:
+        """
+        Async call to the Best Buy API.
+        """
+        valid_payload = self._validate_params(payload)
+        url, params = self._build_url(valid_payload)
+
+        if self.aclient:
+            response = await self.aclient.get(url, params=params)
+            return self._handle_response(response)
+
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, params=params)
+            return self._handle_response(response)
+
+    def _handle_response(self, response: httpx.Response) -> Any:
+        if "json" in response.headers.get("Content-Type", ""):
+            return response.json()
+        return response.content
+
+    def _api_name(self) -> Optional[str]:
         return None
 
-    def _build_url(self, payload):
-        """
-        Receives a payload (dict) with the necessary params to make a call
-        to the Best Buy API and returns a string URL that includes the
-        query and the dict parameters pre-processed for a API call to be
-        made.
-
-        :param paylod: dictionary with request parameters
-
-        :rType: tuple that contains the url that includes the query and
-                the parameters pre-processed for a API call to be made.
-        """
-
+    def _build_url(self, payload: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
         query = payload["query"]
-        # Pre-process paramenters before submitting payload.
-        out = dict()
-        for key, value in payload["params"].items():
-            if isinstance(value, list):
-                out[key] = ",".join(value)
-            else:
-                out[key] = value
+        out = {
+            key: (",".join(value) if isinstance(value, list) else value)
+            for key, value in payload["params"].items()
+        }
 
-        # Add key to params
         out["apiKey"] = self.api_key
         if self._api_name() == BULK_API:
-            url = BASE_URL + f"{query}"
+            url = f"{BASE_URL}{query}"
         else:
-            url = BASE_URL + f"{self._api_name()}({query})"
+            url = f"{BASE_URL}{self._api_name()}({query})"
 
         return (url, out)
 
-    def _validate_params(self, payload):
-        """
-        Validate parameters, double check that there are no None values
-        in the keys.
-
-        :param payload: dictionary, with the parameters to be used to make
-                        a request.
-        """
+    def _validate_params(self, payload: Dict[str, Any]) -> Dict[str, Any]:
         for key, value in payload["params"].items():
-            # TODO: Use a class variable to load the appropiate validation list of params
-            VALID_PARAMS = API_SEARCH_PARAMS + STORE_SEARCH_PARAMS + PRODUCT_SEARCH_PARAMS
-
-            if key not in VALID_PARAMS:
-                err_msg = "{0} is an invalid Product" " Search Parameter".format(key)
+            if key not in ALL_VALID_PARAMS:
+                err_msg = f"{key} is an invalid Search Parameter"
                 raise BestBuyAPIError(err_msg)
 
             if value is None:
-                err_msg = "Key {0} can't have None for a value".format(key)
+                err_msg = f"Key {key} can't have None for a value"
                 raise BestBuyAPIError(err_msg)
 
         return payload

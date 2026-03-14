@@ -1,4 +1,3 @@
-import json
 import xml.etree.ElementTree as ET
 
 import pytest
@@ -6,20 +5,22 @@ import pytest
 from bestbuyapi.utils.exceptions import BestBuyAPIError
 
 
+@pytest.mark.unit
 def test_validate_params(bbapi):
     with pytest.raises(BestBuyAPIError):
         payload = {"query": "some query", "params": {"fiz": "bazz", "wrong": None}}
         bbapi.category._validate_params(payload)
 
 
-def test_json_response(bbapi):
+@pytest.mark.unit
+def test_json_response(bbapi, mock_bestbuy_api):
     query = "accessories.sku=5985609"
     response = bbapi.products.search(query=query, format="json")
     assert isinstance(response, dict), "Response cannot be converted to JSON"
 
 
-def test_xml_response(bbapi):
-
+@pytest.mark.unit
+def test_xml_response(bbapi, mock_bestbuy_api):
     sku_nbr = 5985609
     query = f"sku={sku_nbr}"
 

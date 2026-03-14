@@ -1,59 +1,80 @@
----
-Python Best Buy API Wrapper
----
+# Python Best Buy API Wrapper
 
-![image](https://img.shields.io/badge/version-2.0.0-blue.svg)
+![image](https://img.shields.io/badge/version-2.1.0-blue.svg)
+[![CI](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml)
 
-[![image](https://travis-ci.com/lv10/bestbuyapi.svg?branch=master)](https://travis-ci.com/lv10/bestbuyapi)
-
-This is a small python wrapper implementation for BestBuy API. This
-implementation does not cover all the APIs from BestBuy yet. As of now,
-it only supports the calls to the Products, Categories, bulk and Cover
-APIs. Locations and Reviews API are in the making.
-
-The wrapper doesn\'t assume any design requirements on the user end.
-Queries to the API endpoints are done similar to what you would put in
-the browser with the convenience of having python prepare for you the
-query, url, and interpret the response.
-
-NOTICE: This project is only supported by python 3.6, 3.7, 3.8. If you
-need support for an older version of python3, please reach out to me.
+This is a small python wrapper implementation for BestBuy API.
 
 # Features
 
 - Query Bulk BestBuy API
-- Query Stores BestBuy API (by id, currently)
+- Query Stores BestBuy API
 - Query Products BestBuy API
 - Query Categories BestBuy API
 - Obtain queries result in JSON or XML
-
-For details on how to use the Best Buy API go to:
-<https://developer.bestbuy.com/documentation>
+- Environment variable support via `python-dotenv`
+- Modern development workflow with `uv` and `pre-commit`
 
 # Install
 
-```{.sourceCode .python}
-$ pip install BestBuyAPI
+We recommend using `uv` for package management:
+
+```bash
+uv add bestbuyapi
 ```
 
-**How to use Product, Category, Store and Bulk APIs**
+Or with pip:
 
-```{.sourceCode .python
->>> from bestbuy import BestBuyAPI
->>> bb = BestBuyAPI("YourSecretAPIKey")
->>>
->>> a_prod = bb.products.search(query="sku=9776457", format="json")
->>> a_cat = bb.category.search_by_id(category_id="abcat0011001", format="json")
->>> all_categories = bb.bulk.archive("categories", "json")}
+```bash
+pip install bestbuyapi
+```
+
+# Configuration
+
+You can use a `.env` file to store your API key:
+
+```env
+BESTBUY_API_KEY=your_api_key_here
+```
+
+# Usage
+
+```python
+from bestbuyapi import BestBuyAPI
+
+# If not provided, it will look for BESTBUY_API_KEY in environment variables
+bb = BestBuyAPI()
+
+a_prod = bb.products.search(query="sku=9776457", format="json")
+a_cat = bb.category.search_by_id(category_id="abcat0011001", format="json")
+all_categories = bb.bulk.archive("categories", "json")
+```
+
+# Development
+
+## Running Tests
+
+Tests are executed via `pytest`. We use `pytest-cov` for coverage reporting.
+
+```bash
+uv run pytest --cov=bestbuyapi
+```
+
+## CI/CD and Coverage
+
+Our CI pipeline in GitHub Actions runs tests across multiple Python versions. Coverage reports are generated during the test phase and can be shared or uploaded to services like Codecov.
+
+## Pre-commit Hooks
+
+We use `pre-commit` to ensure code quality. It runs `ruff` for linting and formatting.
+
+```bash
+uv run pre-commit run --all-files
 ```
 
 # FAQ
 
-- Is there any difference between /api.bestbuy.com/ and
-  api.remix.bestbuy.com?
+- Is there any difference between /api.bestbuy.com/ and api.remix.bestbuy.com?
+  A: There is no difference, they serve the same data - we just consolidated domains. The official url to use is api.bestbuy.com.
 
-  A:// This is the response from BestBuy Dev department: \"There is no
-  difference, they serve the same data - we just consolidated domains.
-  The official url to use is api.bestbuy.com though.\"
-
-Any questions please feel free to email me at: <luis@lv10.me>
+Any questions please feel free to email me at: luis@lv10.me
