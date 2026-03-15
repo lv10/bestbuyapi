@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.1.2 (2026-03-15)
+
+### Bug Fixes
+
+- **ci**: Detect new release via semantic-release output instead of dist/ check
+  ([`43e24a2`](https://github.com/lv10/bestbuyapi/commit/43e24a25d27cb3ae25aaed3684d88f73a297bfbc))
+
+
 ## v2.1.1 (2026-03-14)
 
 ### Bug Fixes
