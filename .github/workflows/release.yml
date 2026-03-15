@@ -40,10 +40,8 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # We run versioning and publishing manually via uv to ensure it has access to the environment
-          uv run semantic-release -v version
-
-          # Check if a new version was released by looking for built dist files
-          if [ -d "dist" ] && [ "$(ls -A dist)" ]; then
+          uv run semantic-release -v version 2>&1 | tee /tmp/sr_version.txt
+          if grep -q "The next version is:" /tmp/sr_version.txt; then
             echo "released=true" >> $GITHUB_OUTPUT
           fi
 
