@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v2.1.3 (2026-03-15)
+
+### Bug Fixes
+
+- **docs**: Replace hardcoded version badge with dynamic PyPI badge
+  ([`7eb5d96`](https://github.com/lv10/bestbuyapi/commit/7eb5d9689387fede15051d01cc81144f1891b30a))
+
+
 ## v2.1.2 (2026-03-15)
 
 ### Bug Fixes
