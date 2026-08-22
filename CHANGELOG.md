@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v2.2.0 (2026-08-22)
+
+### Features
+
+- Extend API with recommendations, open box, geo store search, connection pooling, and async/sync
+  support
+  ([`77aa2fc`](https://github.com/lv10/bestbuyapi/commit/77aa2fcd0d15556c1c998836f8ed02e46ac9cd86))
+
+
 ## v2.1.3 (2026-03-15)
 
 ### Bug Fixes
