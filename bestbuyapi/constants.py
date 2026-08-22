@@ -4,6 +4,7 @@
 
 API_VERSION = "v1"
 BASE_URL = f"https://api.bestbuy.com/{API_VERSION}/"
+BETA_BASE_URL = "https://api.bestbuy.com/beta/"
 
 # ======================================
 #             API Names
@@ -13,6 +14,8 @@ PRODUCT_API = "products"
 CATEGORY_API = "categories"
 BULK_API = "bulk"
 STORES_API = "stores"
+RECOMMENDATIONS_API = "recommendations"
+OPEN_BOX_API = "openBox"
 
 # ======================================
 #    Product Search Description Types
@@ -31,7 +34,16 @@ PRODUCT_SEARCH_CRITERIA_TYPES = {1: "customerReviewAverage", 2: "customerReviewC
 #         Valid Search Params
 # ======================================
 
-API_SEARCH_PARAMS = ["facet", "format", "show", "sort", "page", "pageSize"]
+API_SEARCH_PARAMS = [
+    "apiKey",
+    "cursorMark",
+    "facet",
+    "format",
+    "page",
+    "pageSize",
+    "show",
+    "sort",
+]
 
 PRODUCT_SEARCH_PARAMS = [
     "accessories.sku",
@@ -40,9 +52,10 @@ PRODUCT_SEARCH_PARAMS = [
     "bestBuyItemId",
     "bestSellingRank",
     "bundledin.sku",
+    "categoryPath.id",
+    "categoryPath.name",
     "collection",
     "color",
-    "dollarSavings",
     "condition",
     "customerReviewAverage",
     "customerReviewCount",
@@ -52,6 +65,7 @@ PRODUCT_SEARCH_PARAMS = [
     "details.name",
     "details.value",
     "digital",
+    "dollarSavings",
     "features.feature",
     "format",
     "freeShipping",
@@ -76,22 +90,22 @@ PRODUCT_SEARCH_PARAMS = [
     "modelNumber",
     "name",
     "new",
+    "onSale",
     "onlineAvailability",
     "onlineAvailabilityText",
     "onlineAvailabilityTextHtml",
     "onlineAvailabilityUpdateDate",
     "orderable",
-    "onSale",
     "percentSavings",
     "preowned",
     "priceRestriction",
     "priceUpdateDate",
     "priceWithPlan.newTwoYearPlan",
-    "priceWithPlan.upgradeTwoYearPlan",
-    "priceWithPlan.newTwoYearPlanSalePrice",
-    "priceWithPlan.upgradeTwoYearPlanSalePrice",
     "priceWithPlan.newTwoYearPlanRegularPrice",
+    "priceWithPlan.newTwoYearPlanSalePrice",
+    "priceWithPlan.upgradeTwoYearPlan",
     "priceWithPlan.upgradeTwoYearPlanRegularPrice",
+    "priceWithPlan.upgradeTwoYearPlanSalePrice",
     "productId",
     "productTemple",
     "quantityLimit",
@@ -131,16 +145,22 @@ STORE_SEARCH_PARAMS = [
     "address2",
     "city",
     "country",
+    "detailedHours",
     "distance",
     "fullPostalCode",
+    "hours",
+    "hoursAmPm",
     "lat",
     "lng",
     "location",
+    "locationType",
     "longName",
     "name",
     "phone",
     "postalCode",
     "region",
+    "services",
+    "services.service",
     "storeId",
     "storeType",
 ]

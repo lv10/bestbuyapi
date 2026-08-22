@@ -1,8 +1,8 @@
-import pytest
 import zipfile
 from io import BytesIO
 
 import httpx
+import pytest
 
 from bestbuyapi import BASE_URL
 
@@ -34,7 +34,7 @@ def test_archive(bbapi, mock_bestbuy_api):
 
     response = bbapi.bulk.archive(archive_name, file_format)
     assert len(response) >= 1, "Response is empty"
-    for _, data in response.items():
+    for data in response.values():
         assert isinstance(data, bytes), "XML data response is not bytes"
 
 
@@ -57,3 +57,9 @@ def test_archive_subset(bbapi, mock_bestbuy_api):
     )
 
     _ = bbapi.bulk.archive_subset(subset_name, file_format)
+
+
+@pytest.mark.unit
+def test_non_zip_response(bbapi):
+    res = bbapi.bulk._load_zipped_response(b"not a zip file", "json")
+    assert res == {}
