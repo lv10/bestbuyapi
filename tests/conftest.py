@@ -1,7 +1,9 @@
 import os
+
+import httpx
 import pytest
 import respx
-import httpx
+
 from bestbuyapi import BestBuyAPI
 
 
