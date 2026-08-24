@@ -23,7 +23,11 @@ dependencies = [
 ]
 
 [project.urls]
-repository = "https://github.com/lv10/bestbuyapi"
+Homepage = "https://github.com/lv10/bestbuyapi"
+Documentation = "https://github.com/lv10/bestbuyapi#readme"
+Repository = "https://github.com/lv10/bestbuyapi"
+Issues = "https://github.com/lv10/bestbuyapi/issues"
+Funding = "https://buymeacoffee.com/luisvillamg"
 
 [dependency-groups]
 dev = [
