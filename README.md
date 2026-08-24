@@ -3,6 +3,7 @@
 ![image](https://img.shields.io/pypi/v/bestbuyapi.svg)
 [![CI Main](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml?query=branch%3Amain)
 [![CI Dev](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/lv10/bestbuyapi/actions/workflows/ci.yml?query=branch%3Adev)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow.svg)](https://buymeacoffee.com/luisvillamg)
 
 A modern, high-performance, asynchronous and synchronous Python SDK for the [Best Buy REST API](https://bestbuyapis.github.io/api-documentation/).
 
@@ -70,7 +71,9 @@ with BestBuyAPI() as bb:
     open_box_deals = bb.open_box.search_by_sku(8610161)
 
     # 4. Stores by Radius (Latitude, Longitude, Distance in Miles)
-    nearby_stores = bb.stores.search_by_area(lat=44.88476, lng=-93.30058, distance_miles=10)
+    nearby_stores = bb.stores.search_by_area(
+        lat=44.88476, lng=-93.30058, distance_miles=10
+    )
 
     # 5. Categories
     cat = bb.categories.search_by_id("abcat0101001")
@@ -85,6 +88,7 @@ with BestBuyAPI() as bb:
 import asyncio
 from bestbuyapi import AsyncBestBuyAPI
 
+
 async def main():
     async with AsyncBestBuyAPI() as bb:
         # Concurrent API calls
@@ -98,6 +102,7 @@ async def main():
         print(f"Product: {product['products'][0]['name']}")
         print(f"Trending count: {len(trending['results'])}")
         print(f"Stores found: {len(stores['stores'])}")
+
 
 asyncio.run(main())
 ```
@@ -122,7 +127,9 @@ with BestBuyAPI() as bb:
 
 ```python
 async with AsyncBestBuyAPI() as bb:
-    async for page in bb.stores.aiter_pages(query="region=MN", page_size=10, max_pages=3):
+    async for page in bb.stores.aiter_pages(
+        query="region=MN", page_size=10, max_pages=3
+    ):
         for store in page.get("stores", []):
             print(store["storeId"], store["name"])
 ```
@@ -188,4 +195,16 @@ uv run ruff format --check .
 
 ---
 
-Questions or feedback? Feel free to open an issue or reach out at `luis@lv10.me`.
+## Support
+
+If you find this project helpful and want to support its maintenance and development, you can buy me a coffee:
+
+<a href="https://www.buymeacoffee.com/luisvillamg" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="42" width="180">
+</a>
+
+---
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
